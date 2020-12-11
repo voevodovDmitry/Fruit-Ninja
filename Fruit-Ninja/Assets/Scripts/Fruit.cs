@@ -4,20 +4,23 @@ using UnityEngine;
 
 public class Fruit : MonoBehaviour
 {
-    [SerializeField] int angle;
-    [SerializeField] float speedX = 10;
-    [SerializeField] float speedY = 10;
-    [SerializeField] float gravityValue = 10;
+    SpawnManager spawnM;
 
-    Vector3 speed = new Vector3(10, 10, 0);
+    Vector3 speed = new Vector3(20, 10, 0);
     Vector3 gravity = new Vector3(0, -10, 0);
 
+    private float limitY = -9;
+    private float limitX = 22;
 
-    
 
     void Start()
     {
-        InitSpeed();
+        
+        spawnM = GameObject.Find("Spawn Manager").GetComponent<SpawnManager>();
+        
+        InitSpeed(spawnM.angle);
+
+
     }
 
     
@@ -25,11 +28,15 @@ public class Fruit : MonoBehaviour
     {
         speed += gravity * Time.deltaTime;         
         transform.position += speed * Time.deltaTime;
+
+        if (transform.position.y < limitY || transform.position.x > limitX || transform.position.x < -limitX )
+        {
+            Destroy(gameObject);
+        }
     }
 
-    void InitSpeed()
+    void InitSpeed(int angle)
     {
-
         float myltipliyX = Mathf.Cos(angle * Mathf.PI / 180);
         float myltipliyY = Mathf.Sin(angle * Mathf.PI / 180);
         speed.x = speed.x * myltipliyX;
