@@ -42,7 +42,7 @@ public class SpawnManager : MonoBehaviour
             float delay = Random.Range(minDelay, maxDelay);
             yield return new WaitForSeconds(delay);
 
-            int index = Random.Range(0, spawnPoints.Count);
+            int index = GetRandomPriorityIndex();
             angle = GetAngle(index);
             
             Instantiate(fruitPrefab, spawnPoints[index].transform.position, spawnPoints[index].transform.rotation);
@@ -68,4 +68,43 @@ public class SpawnManager : MonoBehaviour
         }
         return 0;
     }
+
+    private int GetRandomPriorityIndex()
+    {
+        int randomPriorityIndex = 0;
+        int sumPriority = spawnPoint_0.priority + spawnPoint_1.priority + spawnPoint_2.priority + spawnPoint_3.priority + spawnPoint_4.priority;
+        List<int> priorityList = new List<int>();
+
+        for (int i = 0; i < spawnPoint_0.priority; i++)
+        {
+            priorityList.Add(0);
+        }
+
+        for (int i = 0; i < spawnPoint_1.priority; i++)
+        {
+            priorityList.Add(1);
+        }
+
+        for (int i = 0; i < spawnPoint_2.priority; i++)
+        {
+            priorityList.Add(2);
+        }
+
+        for (int i = 0; i < spawnPoint_3.priority; i++)
+        {
+            priorityList.Add(3);
+        }
+
+        for (int i = 0; i < spawnPoint_4.priority; i++)
+        {
+            priorityList.Add(4);
+        }
+
+        randomPriorityIndex = priorityList[Random.Range(0, priorityList.Count)];
+       
+
+        return randomPriorityIndex;
+    }
+    
+        
 }
