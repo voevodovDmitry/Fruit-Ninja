@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Fruit : MonoBehaviour
 {
-   
-    private float rotatipnSpeed = 5f;
+    [SerializeField] private float rotatipnSpeed = 5f;
     private float randomRotationSpeed;
-    private float scaleValue = 0.005f;
+    [SerializeField] private float scaleValue = 0.005f;
     private float randomScaleValue;
 
 
@@ -24,6 +23,7 @@ public class Fruit : MonoBehaviour
 
         randomRotationSpeed = Random.Range(-rotatipnSpeed, rotatipnSpeed);
         randomScaleValue = Random.Range(-scaleValue, scaleValue);
+        
     }
 
     
