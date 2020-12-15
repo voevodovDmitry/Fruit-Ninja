@@ -58,9 +58,7 @@ public class SpawnManager : MonoBehaviour
                 angle = GetAngle(index);
                 speedVector = ConfigSpeedVector(angle);
                 int friutIndex = Random.Range(0, fruitsList.Count);
-                fruitsList[friutIndex].GetComponent<Fruit>().speedVector = speedVector;
-
-                //fruitsList[friutIndex].GetComponent<Fruit>().transform.Rotate(new Vector3(20,20,20) * Time.deltaTime);
+                fruitsList[friutIndex].GetComponent<Fruit>().speedVector = speedVector;                
 
                 Instantiate(fruitsList[friutIndex], spawnPoints[index].transform.position, spawnPoints[index].transform.rotation);
                 delayBetweenWave -= stepBetweenWave;
