@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class Fruit : MonoBehaviour
 {
-    
-    
-    
+   
+    private float rotatipnSpeed = 5f;
+    private float randomRotationSpeed;
+    private float scaleValue = 0.005f;
+    private float randomScaleValue;
+
+
+
     Vector3 gravity = new Vector3(0, -10, 0);
     public Vector3 speedVector;
     
@@ -17,7 +22,8 @@ public class Fruit : MonoBehaviour
     void Start()
     {
 
-
+        randomRotationSpeed = Random.Range(-rotatipnSpeed, rotatipnSpeed);
+        randomScaleValue = Random.Range(-scaleValue, scaleValue);
     }
 
     
@@ -30,6 +36,12 @@ public class Fruit : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        
+
+        transform.Rotate(0,0, randomRotationSpeed);
+        transform.localScale += new Vector3(randomScaleValue, randomScaleValue, 0);
+        
     }
 
     

@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     
-    [SerializeField] GameObject fruitPrefab;
+    [SerializeField] List<GameObject> fruitsList;
     [SerializeField] List<SpawnPoint>  spawnPoints;
     
 
@@ -43,8 +43,7 @@ public class SpawnManager : MonoBehaviour
     {
         while (true)
         {
-            int quantityFruitsWave = Random.Range(minQuantityFruits, maxQuantityFruits);
-            Debug.Log(quantityFruitsWave);
+            int quantityFruitsWave = Random.Range(minQuantityFruits, maxQuantityFruits);            
             float delay = Random.Range(minDelay, maxDelay);
             for (int i = 0; i < quantityFruitsWave; i++)
             {
@@ -58,8 +57,12 @@ public class SpawnManager : MonoBehaviour
                 int index = GetRandomPriorityIndex();
                 angle = GetAngle(index);
                 speedVector = ConfigSpeedVector(angle);
-                fruitPrefab.GetComponent<Fruit>().speedVector = speedVector;
-                Instantiate(fruitPrefab, spawnPoints[index].transform.position, spawnPoints[index].transform.rotation);
+                int friutIndex = Random.Range(0, fruitsList.Count);
+                fruitsList[friutIndex].GetComponent<Fruit>().speedVector = speedVector;
+
+                //fruitsList[friutIndex].GetComponent<Fruit>().transform.Rotate(new Vector3(20,20,20) * Time.deltaTime);
+
+                Instantiate(fruitsList[friutIndex], spawnPoints[index].transform.position, spawnPoints[index].transform.rotation);
                 delayBetweenWave -= stepBetweenWave;
                 if (delayBetweenWave < minDalayBetweenWave)
                 {
