@@ -9,13 +9,21 @@ public class SpawnManager : MonoBehaviour
     [SerializeField] List<SpawnPoint>  spawnPoints;
     
 
-    private float minDelay = 1f;
-    private float maxDelay = 3f;
+    private float minDelay = 0.1f;
+    private float maxDelay = 0.3f;
 
     private float maxSpeed = 17;
     private float minSpeed = 14;
 
-    
+    private int minQuantityFruits = 2;
+    private int maxQuantityFruits = 5;
+
+    private float delayBetweenWave = 7f;
+    private float stepBetweenWave = 0.2f;
+    private float minDalayBetweenWave = 0.5f;
+
+
+
 
     public int angle;
     public Vector3 speedVector;
@@ -35,14 +43,31 @@ public class SpawnManager : MonoBehaviour
     {
         while (true)
         {
+            int quantityFruitsWave = Random.Range(minQuantityFruits, maxQuantityFruits);
+            Debug.Log(quantityFruitsWave);
             float delay = Random.Range(minDelay, maxDelay);
-            yield return new WaitForSeconds(delay);
+            for (int i = 0; i < quantityFruitsWave; i++)
+            {
+                if (i == quantityFruitsWave - 1)
+                {
+                    delay += delayBetweenWave;
+                }
 
-            int index = GetRandomPriorityIndex();
-            angle = GetAngle(index);
-            speedVector = ConfigSpeedVector(angle);
-            fruitPrefab.GetComponent<Fruit>().speedVector = speedVector;
-            Instantiate(fruitPrefab, spawnPoints[index].transform.position, spawnPoints[index].transform.rotation);
+                yield return new WaitForSeconds(delay);
+
+                int index = GetRandomPriorityIndex();
+                angle = GetAngle(index);
+                speedVector = ConfigSpeedVector(angle);
+                fruitPrefab.GetComponent<Fruit>().speedVector = speedVector;
+                Instantiate(fruitPrefab, spawnPoints[index].transform.position, spawnPoints[index].transform.rotation);
+                delayBetweenWave -= stepBetweenWave;
+                if (delayBetweenWave < minDalayBetweenWave)
+                {
+                    delayBetweenWave = minDalayBetweenWave;
+                }
+
+            }
+           
         }
     }
 

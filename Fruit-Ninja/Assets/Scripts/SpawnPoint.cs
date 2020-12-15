@@ -8,6 +8,5 @@ public class SpawnPoint : MonoBehaviour
     public int maxAngle;
     public int priority;
     static public int angle;
-
    
 }
