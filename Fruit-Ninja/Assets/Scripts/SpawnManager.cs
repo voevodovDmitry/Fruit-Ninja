@@ -51,7 +51,7 @@ public class SpawnManager : MonoBehaviour
                 yield return new WaitForSeconds(delay);
 
                 int index = GetRandomPriorityIndex();
-                angle = GetAngle(index);                               
+                angle = spawnPoints[index].GetAngle();                               
                 prefabFruit.GetComponent<Fruit>().speedVector = ConfigSpeedVector(angle);
                 prefabFruit.GetComponent<SpriteRenderer>().sprite = spritesFruit[Random.Range(0, spritesFruit.Count)];
 
@@ -68,41 +68,32 @@ public class SpawnManager : MonoBehaviour
         }
     }
 
-    public int GetAngle(int index)
-    {
-        switch (index)
-        {
-            case 0:
-                return spawnPoints[0].GetAngle();
-            case 1:
-                return spawnPoints[1].GetAngle();
-            case 2:
-                return spawnPoints[2].GetAngle();
-            case 3:
-                return spawnPoints[3].GetAngle();
-            case 4:
-                return spawnPoints[4].GetAngle();
-            default:
-                break;
-        }
-        return 0;
-    }
-
+    
     private int GetRandomPriorityIndex()
-    {
-        int sumPriority = 0;
-        List<int> priorityList = new List<int>();
+    {        
+        int sumPriority = 0;       
+        
+        int[] priorityArr = new int[spawnPoints.Count];
 
-        foreach (SpawnPoint spawnPoint in spawnPoints)
+        for (int i = 0; i < spawnPoints.Count; i++)
         {
-            sumPriority += spawnPoint.priority;
-            priorityList.AddRange(spawnPoint.GetLocalPriorityList());
+            sumPriority += spawnPoints[i].priority;
+            priorityArr[i] =  sumPriority;
         }
-        
-        int randomPriorityIndex = priorityList[Random.Range(0, priorityList.Count)];
-        
 
-        return randomPriorityIndex;
+        int random = Random.Range(0, sumPriority);
+
+        for (int i = 0; i< spawnPoints.Count; i++)
+        {
+            
+            if (priorityArr[i] > random)
+            {
+                return i;
+            }
+        }
+       
+        return 0;
+        
     }
 
     private Vector3 ConfigSpeedVector(int angle)

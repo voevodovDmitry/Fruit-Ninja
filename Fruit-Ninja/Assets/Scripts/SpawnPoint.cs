@@ -14,16 +14,4 @@ public class SpawnPoint : MonoBehaviour
         return Random.Range(this.minAngle, this.maxAngle);
     }
 
-    public List<int> GetLocalPriorityList()
-    {
-        List<int> localPriorityList = new List<int>();
-
-        for (int i = 0; i < priority; i++)
-        {
-            localPriorityList.Add(priority);
-        }
-        
-        return localPriorityList;
-    }
-
 }

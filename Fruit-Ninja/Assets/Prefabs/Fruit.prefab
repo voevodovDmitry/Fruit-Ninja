@@ -71,15 +71,15 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: aea6161cb2e73064ba3810cb0262c714, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.2, y: 0.2}
+  m_Size: {x: 1.48, y: 1.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &6307889911780738319
@@ -94,7 +94,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9ba440739e9e174d93cf949e0a8d1f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spritesFruit: []
-  rotatipnSpeed: 5
-  scaleValue: 0.005
-  speedVector: {x: -15.03595, y: 2.9226928, z: 0}
+  rotatipnSpeed: 3
+  scaleValue: 0.002
+  speedVector: {x: 13.987435, y: 0.9780967, z: 0}
