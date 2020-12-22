@@ -41,8 +41,10 @@ public class SpawnManager : MonoBehaviour
         {
             int quantityFruitsWave = Random.Range(minQuantityFruits, maxQuantityFruits);            
             float delay = Random.Range(minDelay, maxDelay);
+            
             for (int i = 0; i < quantityFruitsWave; i++)
             {
+                
                 if (i == quantityFruitsWave - 1)
                 {
                     delay += delayBetweenWave;
@@ -71,24 +73,27 @@ public class SpawnManager : MonoBehaviour
     
     private int GetRandomPriorityIndex()
     {        
-        int sumPriority = 0;       
-        
-        int[] priorityArr = new int[spawnPoints.Count];
+        int sumPriority = 0; 
+        int currPriority = 0;
 
         for (int i = 0; i < spawnPoints.Count; i++)
         {
-            sumPriority += spawnPoints[i].priority;
-            priorityArr[i] =  sumPriority;
+            sumPriority += spawnPoints[i].priority;            
         }
 
         int random = Random.Range(0, sumPriority);
 
         for (int i = 0; i< spawnPoints.Count; i++)
         {
-            
-            if (priorityArr[i] > random)
+
+            if (currPriority > random)
             {
+                Debug.Log(i);
                 return i;
+            }
+            else 
+            {
+                currPriority += spawnPoints[i].priority;
             }
         }
        
